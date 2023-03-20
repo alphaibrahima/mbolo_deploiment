@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+
+<div class="container1">
+  <a href="accueil"> <img src="static/images/logo1.png" alt="" width="100"></a>
+        <!-- meunu nav -->
+        <nav>
+            <ul>
+                <li><a href="/"> Accueil </a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <li> <a href="news"> Actualités </a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <li><a href="#"> Catégories associations </a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <li><a href="#"> Agir </a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <li> <a href="#"> Nous contacter </a></li>
+            </ul>
+        </nav>
+        <!-- Partie inscription  -->
+        <div class="letd1">
+          {% if user.is_authenticated %}
+            <a href="logout">Se deconnecter </a>
+          {% else %}
+            <a href="user_login">Se Connecter </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="register">S'inscrire <i class="fa-solid fa-right-to-bracket"></i></a>
+          {% endif %}
+           
+        </div>
+    
+    </div>
+    <br><br>
+</head>
+<body>
+    
+    {%  block content%}
+    <h1 align="center"> <u>Resultats Recherche</u> </h1>
+<br><br>
+<div class="container-fluid justify-content-center">
+    <ul>
+      <li> <p> Le resultat de la recherche sur  <b> {{ etiquette }}</b></p></li>
+        {% for assoss in result %}
+        <div class="container">
+          <div class="row">   
+            <div class="col-md-4">
+              <div class="card">
+                <div class="card-body">
+                  <h1 class="card-title text-bg-warning"> <u>Nom Association:</u> {{assoss.user}}</h1>
+                  <p class="card-text"> <u>Email: </u> {{assoss.email}}</p>
+                  <p class="card-text"> <u>Numero:</u>  {{assoss.numero}}</p>
+                  <p class="card-text"> <u>Address:</u>  {{assoss.address}}</p>
+                  <p class="card-text"><b><u>Activité Principale: </u></b>{{assoss.activitePrincipal}}</p>
+                  <p class="card-text"><b> <u>Activité Secondaire: </u> </b>{{assoss.activiteSecondaire}}</p>
+                  <p class="card-text"><b> <u>Autres activités:</u> </b>{{assoss.activiteThird}}</p>
+                </div>  
+              </div>
+            </div>
+          </div>
+        </div>
+<br><br>
+<hr>
+      {% empty %}
+        <li> <h3>Aucun résultats à votre recherche .</h3> </li>
+
+      {% endfor %}
+
+    </ul>
+</div>
+    {%  endblock %}
+
+
+</body>
+</html>
